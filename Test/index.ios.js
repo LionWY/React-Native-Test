@@ -2,13 +2,15 @@
 import React, {Component} from 'react';
 import {
     AppRegistry,
+    AsyncStorage,
     View,
     Navigator,
     StatusBar,
     TouchableHighlight,
     Text,
     NavigationBar,
-    NavigatorIOS
+    NavigatorIOS,
+    AppState
 
 } from 'react-native';
 // import FirstPageComponent from './FirstPageComponent';
@@ -21,7 +23,35 @@ import {
 //
 // import TouchableExample from './package/TouchableExample';
 // import TabbarIOSExample from './package/TabbarIOSExample'
-import Search from './package/TextInputExample'
+// import Search from './package/TextInputExample';
+// import BaseStorageExample from './package/BaseStorageExample';
+// import AlertExample from './package/AlertExample';
+// import ActionSheetIOSExample from './package/ActionSheetIOSExample';
+// import RequestExample from './package/RequestExample';
+// import GeolocationExample from './package/GeolocationExample';
+import CameraExample from './package/CameraExample';
+
+// let UID123_object = {
+//     name: 'Charis',
+//     age: 30,
+//     traits: {hair: 'brown', eye: 'brown'},
+// };
+//
+// let UID123_delta = {
+//     age: 31,
+//     traits: {eye: 'blue', shoe_size: 10}
+// };
+//
+// AsyncStorage.setItem('UID123', JSON.stringify(UID123_object), ()=>{
+//     AsyncStorage.mergeItem('UID123', JSON.stringify(UID123_delta), ()=>{
+//         AsyncStorage.getItem('UID123', (err, result)=> {
+//             console.log(result);
+//             console.log(AppState.currentState);
+//         });
+//     });
+// });
+
+
 
 export default class SampleComponent extends Component {
 
@@ -37,7 +67,7 @@ export default class SampleComponent extends Component {
                 style= {{flex: 1}}
                 initialRoute={{
                     title: SampleComponent.title,
-                    component: Search,
+                    component: CameraExample,
                     passProps: {onExampleExit},
                     interactivePopGestureEnabled: false,
                     tintColor: "#008888"

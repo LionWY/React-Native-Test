@@ -21,6 +21,7 @@
   
 //    UINavigationController
 //  UITabBar
+//  NSBundle
 //  UITextField
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
