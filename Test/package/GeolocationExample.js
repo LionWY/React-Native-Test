@@ -28,7 +28,7 @@ export default class GeolocationExample extends Component {
     }
 
     componentWillUnmount() {
-        navigator.geolocation.clearWathc(this.watchID);
+        navigator.geolocation.clearWatch(this.watchID);
     }
 
     render() {

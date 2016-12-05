@@ -8,7 +8,7 @@ import {
 
 var PickerItemIOS = PickerIOS.Item;
 
-var STORAGE_KEY = '@AsyncStorageExample:key';
+var STORAGE_KEY = '@AsyncStorageExampleKey';
 var COLORS = ['red', 'orange', 'yellow', 'green', 'blue'];
 
 export default class BaseStorageExample extends Component {
@@ -49,7 +49,7 @@ export default class BaseStorageExample extends Component {
                 <PickerIOS
                     selectedValue={color}
                     onValueChange={this._onValueChange}
-                    style={{backgroundColor: 'cyan', marginTop: 64}} >
+                    style={{backgroundColor: 'cyan', marginTop: 84}} >
 
                     {COLORS.map((value) => (
                         <PickerItemIOS
@@ -77,7 +77,12 @@ export default class BaseStorageExample extends Component {
                 <Text>
                     Messges:
                 </Text>
-                {this.state.messages.map((m)=><Text key={m}>{m}</Text>)}
+                {/* 这里为什么要map(m,i)，实际是在按索引进行输出 */}
+                {this.state.messages.map((m, i)=>
+                    <Text key={i}>
+                        {m}
+
+                    </Text>)}
             </View>
 
         );
@@ -86,6 +91,7 @@ export default class BaseStorageExample extends Component {
     _onValueChange = async(selectedValue) => {
         this.setState({selectedValue});
         try {
+
             await AsyncStorage.setItem(STORAGE_KEY, selectedValue);
             this._appendMessage('Saved selection to disk: ' + selectedValue);
         } catch (e) {
@@ -97,6 +103,7 @@ export default class BaseStorageExample extends Component {
 
     _removeStorage = async() => {
         try {
+            await AsyncStorage.clear();
             await AsyncStorage.removeItem(STORAGE_KEY);
             this._appendMessage('selection removed from disk');
         } catch (e) {
@@ -107,7 +114,10 @@ export default class BaseStorageExample extends Component {
         }
     }
 
+
+
     _appendMessage = (message) => {
         this.setState({messages: this.state.messages.concat(message)});
+        console.log('====' + this.state.messages);
     }
 }

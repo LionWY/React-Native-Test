@@ -9,7 +9,7 @@ import {
     AlertIOS
 } from 'react-native';
 
-var fetchParams ={
+var fetchParams = {
     first: 4,
     groupTypes: 'All',
     assetType: 'Photos',
@@ -107,9 +107,6 @@ export default class CameraExample extends Component {
 
     saveImg(img1, img2) {
         var _that = this;
-
-        // CameraRoll.saveToCameraRoll(imgURL + img1);
-        // CameraRoll.saveToCameraRoll(imgURL + img2);
 
         CameraRoll.saveToCameraRoll(imgURL + img2, 'photo', (url)=>{
             photos.unshift(url);

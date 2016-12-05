@@ -41,7 +41,7 @@ export default class AlertExample extends Component {
 
                 <TouchableHighlight
                     style={styles.wrapper}
-                    onPress={()=>AlertIOS.alert('Type a value', '12312', this.customButtons)} >
+                    onPress={()=>AlertIOS.alert('Type a value', '', this.saveResponse)} >
                     <View style={styles.button}>
                         <Text>
                             prompt with title & callback
@@ -61,7 +61,7 @@ export default class AlertExample extends Component {
 
                 <TouchableHighlight
                     style={styles.wrapper}
-                    onPress={()=> AlertIOS.prompt('Type a value', 'userName', this.saveResponse, 'secure-text')} >
+                    onPress={()=> AlertIOS.prompt('Type a value', 'userName', this.saveResponse, 'secure-text', 'defaultValue')} >
                     <View style={styles.button}>
                         <Text>
                             prompt with title, callback & default value

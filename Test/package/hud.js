@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 import React, {Component} from 'react';
 import{
@@ -41,8 +41,9 @@ export default class ToggleAnimatingActivityIndicator extends Component {
         return (
             <ActivityIndicator
                 animating={this.state.animating}
-                style={[styles.centering, {height: 80}]}
+                style={[styles.centering, {height: 80, marginTop: 64}]}
                 size='large'
+                color='red'
             />
         );
     }

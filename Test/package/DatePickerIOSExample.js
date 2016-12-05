@@ -42,7 +42,7 @@ export default class DatePickerIOSExample extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{marginTop: 64}}>
                 <WithLabel label='Value:'>
                     <Text> {
                         this.state.date.toLocaleDateString() +
@@ -85,7 +85,8 @@ export default class DatePickerIOSExample extends Component {
                     mode="time"
                     timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
                     onDateChange={this.onDateChange}
-                    minuteInterval={6}
+                    minuteInterval={10}
+                    style={{backgroundColor: 'cyan', marginTop: 10}}
                 />
 
 

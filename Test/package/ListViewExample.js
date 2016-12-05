@@ -10,10 +10,10 @@ import {
 
 export default class ListViewExample extends Component {
 
-    statics: {
-        title: '<ListView>',
-        description: 'Performant, scrollable list of data.',
-    }
+    // statics: {
+    //     title: '<ListView>',
+    //     description: 'Performant, scrollable list of data.',
+    // }
 
     this.state = {
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
