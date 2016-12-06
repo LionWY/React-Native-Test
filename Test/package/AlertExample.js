@@ -89,6 +89,8 @@ export default class AlertExample extends Component {
 
     saveResponse(promptValue) {
         this.setState({promptValue: JSON.stringify(promptValue)});
+
+        
     }
 
 

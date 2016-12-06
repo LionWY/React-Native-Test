@@ -17,7 +17,7 @@ export default class TouchableExample extends Component {
             <View style={styles.flex}>
                 <View>
                     <TouchableHighlight
-                        onPress={this.show.bind(this, 'React Native123')}
+                        onPress={this.show.bind(this, 'React Native')}
                         underlayColor='#E1F6FF'>
                         <Text style={styles.item}>
                             React Native 123
@@ -26,7 +26,7 @@ export default class TouchableExample extends Component {
                     </TouchableHighlight>
                     <TouchableHighlight
                         onPress={this.show.bind(this, 'React Native123')}
-                        underlayColor='#E1F6FF'>
+                        underlayColor='#9A1D1D'>
                         <Text style={styles.item}>
                             React Native 123
                         </Text>
@@ -50,10 +50,10 @@ export default class TouchableExample extends Component {
 const styles = StyleSheet.create({
     flex: {
         flex: 1,
-        marginTop: 25,
-        padding: 64
+        marginTop: 64
     },
     item: {
+        alignSelf: 'center',
         fontSize: 18,
         marginLeft: 5,
         color: '#434343'
@@ -64,8 +64,9 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         backgroundColor: '#18B4FF',
-        justifyContent: 'center',
+        alignSelf: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 50
     }
 })

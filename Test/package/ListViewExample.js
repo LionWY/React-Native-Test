@@ -5,40 +5,31 @@ import {
     View,
     TouchableHighlight,
     Text,
+    Image,
     RecyclerViewBackedScrollView
 } from 'react-native';
 
+import NavigatorIOSExample from './NavigatorIOSExample';
+
 export default class ListViewExample extends Component {
 
-    // statics: {
-    //     title: '<ListView>',
-    //     description: 'Performant, scrollable list of data.',
-    // }
-
-    this.state = {
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        return {
+    constructor(props){
+        super(props);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
             dataSource: ds.cloneWithRows(this._genRows({})),
+
+            _pressData: ({}: {[key: number]: boolean}),
+
         };
     }
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         // var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    //         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    //         return {
-    //             dataSource: ds.cloneWithRows(this._genRows({})),
-    //         }
-    //
-    //     };
-    //
-    // }
-    // _pressData: ({}: {[key: number]: boolean})
-    // _pressData: ({}: {[key: number]: boolean})
-
     componentWillMount() {
-        this._pressData ={};
+        this.state._pressData ={};
+
+    }
+
+    componentDidMount(){
+        // console.log(this.props.navigator);
     }
 
     render() {
@@ -47,25 +38,24 @@ export default class ListViewExample extends Component {
 
                 dataSource={this.state.dataSource}
                 renderRow={this._renderRow}
-                renderScrollComponent={props => <RecyclerViewBackedScrollView {...porps} />}
-                renderSeparator={this._renderSeparator}
+                // renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+                // renderSeparator={this._renderSeparator}
             />
         );
     }
 
+
     _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID:number) => void) {
         var rowHash = Math.abs(hashCode(rowData));
         var imgSource = THUMB_URLS[rowHash % THUMB_URLS.length];
+
         return (
-            <TouchableHighlight onPress={()=>{
-                this._pressRow(rowID);
-                highlightRow(sectionID, rowID);
-                }}>
+            <TouchableHighlight onPress={()=>{}}>
                 <View>
                     <View style={styles.row}>
                         <Image style={styles.thumb} source={imgSource} />
                         <Text style={styles.text}>
-                            {rowData + '-' + LOREM_IPSUM.substr(0, rowHash % 301 + 10)}
+                            {rowData + '-' + LOREM_IPSUM.substr(0, rowHash % 600 + 10)}
                         </Text>
 
                     </View>
@@ -77,9 +67,18 @@ export default class ListViewExample extends Component {
         );
     }
 
+    _alert(value) {
+        alert(value);
+    }
+    _goToSelf() {
+        alert('11');
+        this.props.navigator.push({
+            component: ListViewExample
+        });
+    }
     _genRows(pressData: {[key: number]: boolean}): Array<string> {
         var dataBlob = [];
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 10; i++) {
             var pressedText = pressData[i] ? '(pressed)' : '';
             dataBlob.push('Row' + i + pressedText);
         }
@@ -87,10 +86,10 @@ export default class ListViewExample extends Component {
         return dataBlob;
     }
 
-    _pressRows(rowID: number) {
-        this._pressData[rowID] = !this._pressData[rowID];
+    _pressRow(rowID: number) {
+        this.state._pressData[rowID] = !this.state._pressData[rowID];
         this.setState({dataSource: this.state.dataSource.cloneWithRows(
-            this._genRows(this._pressData)
+            this._genRows(this.state._pressData)
         )});
     }
 
@@ -109,21 +108,21 @@ export default class ListViewExample extends Component {
 
 var THUMB_URLS = [
     require('./img/icon1.png'),
+    require('./img/icon2.png'),
+    require('./img/icon3.png'),
+    require('./img/icon4.png'),
     require('./img/icon1.png'),
+    require('./img/icon2.png'),
+    require('./img/icon3.png'),
+    require('./img/icon4.png'),
     require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
-    require('./img/icon1.png'),
+    require('./img/icon2.png'),
+    require('./img/icon3.png'),
+    require('./img/icon4.png'),
     require('./img/icon1.png'),
     require('./img/icon1.png'),
 ];
-var LOREM_IPSUM = 'Lorem ipsum dolor sit amet, ius ad pertinax oportere accommodare, an vix civibus corrumpit referrentur. Te nam case ludus inciderint, te mea facilisi adipiscing. Sea id integre luptatum. In tota sale consequuntur nec. Erat ocurreret mei ei. Eu paulo sapientem vulputate est, vel an accusam intellegam interesset. Nam eu stet pericula reprimique, ea vim illud modus, putant invidunt reprehendunt ne qui.';
+var LOREM_IPSUM = 'Lorem ipsum dolor sit amet, ius ad pertinax oportere accommodare, an vix civibus corrumpit referrentur. Te nam case ludus inciderint, te mea facilisi adipiscing. Sea id integre luptatum. In tota sale consequuntur nec. Erat ocurreret mei ei. Eu paulo sapientem vulputate est, vel an accusam intellegam interesset. Nam eu stet pericula reprimique, ea vim illud modus, putant invidunt reprehendunt ne quite.';
 
 var hashCode = function(str) {
     var hash = 15;
@@ -146,6 +145,7 @@ const styles = StyleSheet.create({
         height: 64
     },
     text: {
-        flex: 1
+        flex: 1,
+        marginLeft: 5
     }
 })

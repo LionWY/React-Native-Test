@@ -22,8 +22,8 @@ import {
 import ToggleAnimatingActivityIndicator from './package/hud';
 // //
 import DatePickerIOSExample from './package/DatePickerIOSExample';
-// import ImageExample from './package/ImageExample';
-// // import ListViewExample from './package/ListViewExample';
+import ImageExample from './package/ImageExample';
+import ListViewExample from './package/ListViewExample';
 import NavigatorIOSExample from './package/NavigatorIOSExample';
 import TouchableExample from './package/TouchableExample';
 import TabbarIOSExample from './package/TabbarIOSExample';
@@ -139,19 +139,20 @@ class HomeView extends Component {
                     navigator: this.props.navigator,
                     title: 'hud'}}
                 />
-                {/* <CellView
+                <CellView
 
                     detailText='show image'
                     route={{component: ImageExample,
                     navigator: this.props.navigator,
                     title: 'ImageExample'}}
-                /> */}
-                {/* <CellView
-                    title='ListViewExample'
+                />
+                <CellView
+
                     detailText='show tableView'
                     route={{component: ListViewExample,
-                    navigator: this.props.navigator}}
-                /> */}
+                    navigator: this.props.navigator,
+                    title: 'ListViewExample'}}
+                />
                 <CellView
 
                     detailText='show NavigatorIOS'
@@ -159,13 +160,13 @@ class HomeView extends Component {
                     navigator: this.props.navigator,
                     title: 'NavigatorIOSExample'}}
                 />
-                {/* <CellView
+                <CellView
 
                     detailText='show request'
                     route={{component: RequestExample,
                     navigator: this.props.navigator,
                     title: 'RequestExample'}}
-                /> */}
+                />
                 <CellView
 
                     detailText='show tabbar'

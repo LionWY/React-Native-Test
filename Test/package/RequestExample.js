@@ -18,11 +18,11 @@ export default class RequestExample extends Component {
                 <Text onPress={this._doFetch} style={styles.btn}>
                     Fetch 请求数据
                 </Text>
-                <Text onPress={this._postRequest(url, null, (data)=>{
+                {/* <Text onPress={this._postRequest(url, null, (data)=>{
                     console.log('====' + data);
                 })} style={styles.btn}>
                     Post 请求数据
-                </Text>
+                </Text> */}
                 <Text onPress={this._getMoviesFromApiAsync} style={styles.btn}>
                     Movies 请求数据
                 </Text>
@@ -39,6 +39,7 @@ export default class RequestExample extends Component {
             }
             if (request.status === 200) {
                 console.log('success', request.responseText);
+                alert(request.responseText);
             } else {
                 console.warn('error');
             }
@@ -55,6 +56,7 @@ export default class RequestExample extends Component {
         })
         .then((responseText) => {
             console.log(responseText);
+            alert(responseText);
         })
         .catch((error)=>{
             console.warn(error);
@@ -65,7 +67,8 @@ export default class RequestExample extends Component {
         return fetch(url)
         .then((response) => response.json())
         .then((responseJson) => {
-            console.log(responseJson);
+            console.log(JSON.stringify(responseJson.movies));
+            alert(JSON.stringify(responseJson.movies));
         })
         .catch((error) => {
             console.error(error);
@@ -87,7 +90,7 @@ export default class RequestExample extends Component {
         .then((responseJson)=>{
             console.log(responseJson);
             callback(responseJson);
-
+            alert(responseJson);
         })
         .catch((error)=>{
             console.warn(error);
