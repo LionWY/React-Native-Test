@@ -21,17 +21,17 @@ export default class CameraExample extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            photos: null
+            photos: null,
         };
     }
 
     render() {
 
-        var photos = this.state.photes || [];
+        var photos = this.state.photos || [];
         var photoView = [];
         for (var i = 0; i < 4; i+=2) {
             photoView.push(
-                <View style={styles.row}>
+                <View style={styles.row} key={i}>
                     <View style={styles.flex_1}>
                         <Image
                             resizeMode="stretch"
@@ -88,17 +88,17 @@ export default class CameraExample extends Component {
 
     componentDidMount() {
         var _that = this;
-
         CameraRoll.getPhotos(fetchParams)
         .then((data)=> {
-            console.log('====' + data.edges);
             var edges = data.edges;
             var photos = [];
             for (var i in edges){
                 photos.push(edges[i].node.image.uri);
             }
+
             _that.setState({
-                photos: photos
+                photos: photos,
+
             });
         }, ()=> {
             alert('图片获取失败');
@@ -108,17 +108,42 @@ export default class CameraExample extends Component {
     saveImg(img1, img2) {
         var _that = this;
 
-        CameraRoll.saveToCameraRoll(imgURL + img2, 'photo', (url)=>{
+        CameraRoll.saveToCameraRoll(imgURL + img1, 'photo')
+        .then((url)=>{
+            console.log('-----' + url);
+            var photos =_that.state.photos;
             photos.unshift(url);
             _that.setState({
                 photos: photos
+
             });
-            AlertIOS.alert('图片保存成功');
-        }, ()=> {
-            AlertIOS.alert('图片保存失败');
+            AlertIOS.alert('图片1保存成功');
+        })
+        .catch((error)=> {
+            AlertIOS.alert('图片1保存失败' + error);
+        })
+
+        CameraRoll.saveToCameraRoll(imgURL + img2, 'photo')
+        .then((url)=>{
+            console.log('-----' + url);
+            var photos =_that.state.photos;
+            photos.unshift(url);
+            _that.setState({
+                photos: photos
+
+            });
+            AlertIOS.alert('图片2保存成功');
+        })
+        .catch((error)=> {
+            AlertIOS.alert('图片2保存失败' + error);
         });
 
-        AlertIOS.alert('图片保存成功');
+
+        // CameraRoll.saveToCameraRoll(imgURL + img2, 'photo', (url)=>{
+
+
+
+        // AlertIOS.alert('图片保存成功');
 
         // CameraRoll.saveToCameraRoll(imgURL + img1, 'photo', (url)=>{
         //     if (url) {

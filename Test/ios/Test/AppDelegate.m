@@ -19,13 +19,8 @@
   NSURL *jsCodeLocation;
 
   
-//    UINavigationController
-//  UITabBar
-//  NSBundle
-//  UITextField
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
-  
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Test"

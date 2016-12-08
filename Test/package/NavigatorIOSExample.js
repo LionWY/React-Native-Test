@@ -44,7 +44,7 @@ export default class NavigatorIOSExample extends Component {
                                 component: NavigatorIOSExample,
                                 backButtonTitle: 'custom back',
                                 passProps: {
-                                    depth: this.props.depth ? this.props.depth + 1 : 1
+                                    depth: this.props.depth ? this.props.depth + 1 : 2
                                 }
                             });
                         })
@@ -108,8 +108,14 @@ export default class NavigatorIOSExample extends Component {
 
                     }
                     {
-                        this._renderRow('pop', ()=>{
-                            this.props.navigator.popN(2);
+                        this._renderRow('popN(2)', ()=>{
+                            if (this.props.depth > 1) {
+                                this.props.navigator.popN(2);
+                            }
+                            else {
+                                alert('depth<=1')
+                            }
+
                         })
                     }
                     {
