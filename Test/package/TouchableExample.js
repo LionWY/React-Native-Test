@@ -50,23 +50,23 @@ export default class TouchableExample extends Component {
 const styles = StyleSheet.create({
     flex: {
         flex: 1,
-        marginTop: 64
+        marginTop: 64,
+        justifyContent: 'center',
+        alignItems: 'center'
+
     },
     item: {
-        alignSelf: 'center',
         fontSize: 18,
         marginLeft: 5,
         color: '#434343'
     },
     btn: {
-        marginLeft: 30,
         marginTop: 30,
         width: 100,
         height: 100,
-        backgroundColor: '#18B4FF',
-        alignSelf: 'center',
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#18B4FF',
         borderRadius: 50
     }
 })

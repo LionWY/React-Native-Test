@@ -66,7 +66,7 @@ class ShereActionSheetExample extends Component {
         return (
             <View>
                 <Text onPress={this.showShareActionSheet} style={styles.button}>
-                    Click to show the share ActionSheer
+                    Click to Screenshot and show the share ActionSheer
                 </Text>
                 <Text>
                     {
@@ -89,8 +89,9 @@ class ShereActionSheetExample extends Component {
             (error) => alert(error),
             (success, method) => {
                 var text;
+
                 if (success) {
-                    text = 'Shared via ${method}';
+                    text = `Shared via ${method}`;
                 } else {
                     text = 'You didn\'t share';
                 }
