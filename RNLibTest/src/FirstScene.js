@@ -13,25 +13,25 @@ export default class FirstScene extends Component {
     static navigatorButtons = {
 
         leftButtons:[{
-            title: 'left',
-            id: 0
+            title: '右滑',
+            id: 0,
         }],
 
         rightButtons:[
             {
-                title: 'R1',
+                title: '左滑',
                 id: 1
             },
             {
-                title: 'R2',
+                title: 'Alert',
                 id: 2
             }
         ]
     }
 
     static navigatorStyle = {
-        navBarBackgroundColor: 'green',
-        navBarTextColor: 'red',
+        navBarBackgroundColor: '#94E494',
+        navBarTextColor: '#2D0D46',
     }
 
 
@@ -39,6 +39,7 @@ export default class FirstScene extends Component {
 
     constructor(props) {
         super(props);
+
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
         this.state = {
 
@@ -72,16 +73,11 @@ export default class FirstScene extends Component {
                     this.props.navigator.push({
                         title: 'Third',
                         screen: 'Scene.ThirdScene',
-
-
                     })
-                    // this.props.navigator.toggleTabs({
-                    //   to: 'hidden',
-                    //   animated: true,
-                    // })
+
                 }}>
                     <Text style={styles.btn}>
-                        点击跳转
+                        Third
                     </Text>
                 </TouchableOpacity>
 
@@ -94,7 +90,7 @@ export default class FirstScene extends Component {
                     })
                 }}>
                     <Text style={styles.btn}>
-                        照相_react-native-camera
+                        相册-react-native-image-picker
                     </Text>
                 </TouchableOpacity>
 
@@ -129,6 +125,8 @@ const styles = StyleSheet.create({
         height: 25,
         margin: 20,
         textAlign: 'center',
+        fontSize: 20,
+        borderRadius: 5,
         // alignSelf: 'center',
         width: Dimensions.get('window').width - 40,
         backgroundColor: 'blue'

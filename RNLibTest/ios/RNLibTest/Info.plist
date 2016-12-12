@@ -37,6 +37,8 @@
     <string/>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string/>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string/>
     <key>UIAppFonts</key>
     <array>
       <string>Entypo.ttf</string>

@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 import {
     View,
     StyleSheet,
-    Text
+    Text,
+    TabBarIOS
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import {Button, SocialIcon} from 'react-native-elements';
 
 
@@ -13,7 +17,7 @@ export default class IconExample extends Component {
     constructor(props) {
         super(props);
         this.state={
-
+            selectedState: 'home'
         };
     }
 
@@ -41,7 +45,12 @@ export default class IconExample extends Component {
     // )
     render() {
         return (
+
+
             <View style={styles.container}>
+
+
+
                 <Button
                   title='BUTTON'
 
@@ -67,6 +76,8 @@ export default class IconExample extends Component {
                     type='twitter'
                 />
             </View>
+
+
         );
     }
 }

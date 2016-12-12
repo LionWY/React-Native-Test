@@ -15,14 +15,14 @@ export default class CameraPicture extends Component {
         this.state = {
 
         };
-        this.props.navigator.setOnNavigatorEvent(this.navigatorEvent.bind(this));
+        // this.props.navigator.setOnNavigatorEvent(this.navigatorEvent.bind(this));
     }
 
     navigatorEvent(event){
         if (event.id === 1) {
             this.props.navigator.pop();
 
-            alert('back');
+            // alert('back');
         }
     }
 

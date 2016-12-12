@@ -3,16 +3,24 @@ import {
     View,
     StyleSheet,
     Dimensions,
-    Text
+    Text,
+    ListView
 } from 'react-native';
 
+
+// var {ControlledRefreshableListView} = require('react-native-refreshable-listview')
+// import {ControlledRefreshableListView} from 'react-native-refreshable-listview';
 
 
 
 export default class ThirdScene extends Component {
     constructor(props) {
         super(props);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
+
         this.state = {
+
+            dataSource: ds.cloneWithRows(['row1', 'row2'])
 
         };
         this.props.navigator.setOnNavigatorEvent(this.navigatorEvent.bind(this));
@@ -46,6 +54,10 @@ export default class ThirdScene extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData)=><Text>{rowData}</Text>}
+                />
 
 
             </View>
@@ -58,7 +70,9 @@ export default class ThirdScene extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#00FCA1'
+        backgroundColor: '#00FCA1',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
 })
