@@ -37,20 +37,36 @@ export default class ListViewExample extends Component {
             <ListView
 
                 dataSource={this.state.dataSource}
-                renderRow={this._renderRow}
-                // renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-                // renderSeparator={this._renderSeparator}
+                renderRow={this._renderRow.bind(this)}
+                renderSectionHeader={this._renderSection.bind(this)}
+                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+                renderSeparator={this._renderSeparator}
             />
         );
     }
 
+    _renderSection(sectionID: number) {
+        return (
+            <View style={{backgroundColor: 'green', justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{color: 'red'}}>
+                    Section Header
+                </Text>
+            </View>
+        )
+    }
 
-    _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID:number) => void) {
+
+    _renderRow(rowData: string, sectionID: number, rowID: number) {
         var rowHash = Math.abs(hashCode(rowData));
         var imgSource = THUMB_URLS[rowHash % THUMB_URLS.length];
 
+        console.log('------' + rowHash +'\r\n' + imgSource);
+
         return (
-            <TouchableHighlight onPress={()=>{}}>
+            <TouchableHighlight onPress={() => {
+                this._pressRow(rowID);
+                // highlightRow(sectionID, rowID);
+            }}>
                 <View>
                     <View style={styles.row}>
                         <Image style={styles.thumb} source={imgSource} />
@@ -67,15 +83,7 @@ export default class ListViewExample extends Component {
         );
     }
 
-    _alert(value) {
-        alert(value);
-    }
-    _goToSelf() {
-        alert('11');
-        this.props.navigator.push({
-            component: ListViewExample
-        });
-    }
+
     _genRows(pressData: {[key: number]: boolean}): Array<string> {
         var dataBlob = [];
         for (var i = 0; i < 10; i++) {
@@ -95,13 +103,13 @@ export default class ListViewExample extends Component {
 
     _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
         return (
-            <View>
+            <View
                 key={`${sectionID}-${rowID}`}
                 style={{
                     height: adjacentRowHighlighted ? 4 : 1,
                     backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC'
                 }}
-            </View>
+            />
         );
     }
 }

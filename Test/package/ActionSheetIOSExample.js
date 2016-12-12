@@ -79,7 +79,8 @@ class ShereActionSheetExample extends Component {
     }
 
     showShareActionSheet = ()=> {
-        UIManager.takeSnapshot('window').then((uri)=> {
+        UIManager.takeSnapshot('window')
+        .then((uri)=> {
             ActionSheetIOS.showShareActionSheetWithOptions({
                 url: uri,
                 excludedActivityTypes: [
