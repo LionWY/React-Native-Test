@@ -7,6 +7,12 @@ import ThirdScene from './ThirdScene';
 import CameraPicture from './CameraPicture';
 import IconExample from './IconExample';
 import ImagePickerExample from './ImagePickerExample';
+import HackerNews from './HackerNews';
+
+import {NativeModules} from 'react-native';
+
+var NativeVC = NativeModules.NativeVC;
+
 
 export function registerScenes() {
     Navigation.registerComponent('Scene.FirstScene', ()=> FirstScene);
@@ -17,4 +23,6 @@ export function registerScenes() {
     Navigation.registerComponent('Scene.Picture', ()=> ImagePickerExample);
     Navigation.registerComponent('Scene.Icon', ()=> IconExample);
     Navigation.registerComponent('Scene.Camera', ()=> CameraPicture);
+    Navigation.registerComponent('Scene.HN', ()=> HackerNews);
+    Navigation.registerComponent('Scene.NativeVC', ()=> NativeVC);
 }

@@ -8,11 +8,6 @@ import {
 } from 'react-native';
 
 
-// var {ControlledRefreshableListView} = require('react-native-refreshable-listview')
-// import {ControlledRefreshableListView} from 'react-native-refreshable-listview';
-
-
-
 export default class ThirdScene extends Component {
     constructor(props) {
         super(props);
@@ -54,16 +49,21 @@ export default class ThirdScene extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={(rowData)=><Text>{rowData}</Text>}
-                />
+                <Text onPress={this._pushNative.bind(this)}>
+                    跳转NativeVC
+                </Text>
 
 
             </View>
         )
     }
 
+    _pushNative() {
+        this.props.navigator.push({
+            title: 'NativeVC',
+            screen: 'Scene.NativeVC'
+        })
+    }
 
 }
 

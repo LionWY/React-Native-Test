@@ -16,6 +16,8 @@ import {
 
 registerScenes();
 
+
+
 Navigation.startTabBasedApp({
     tabs:[
         {
@@ -33,6 +35,21 @@ Navigation.startTabBasedApp({
             selectedIcon: require('./img/2-1.png'),
             title: 'Scene Two'
         },
+        // {
+        //     label: 'Two',
+        //     screen: 'Scene.SecondScene',
+        //     icon: require('./img/3.png'),
+        //     selectedIcon: require('./img/3-1.png'),
+        //     title: 'Scene Two'
+        // },
+        {
+            label: 'HN',
+            screen: 'Scene.HN',
+            icon: require('./img/4.png'),
+            selectedIcon: require('./img/4-1.png'),
+            title: 'Hacker News'
+        },
+
     ],
     tabsStyle: { // optional, add this if you want to style the tab bar beyond  the defaults
         // tabBarButtonColor: '#FF2600', // optional, change the color of the tab icons and text (also unselected)

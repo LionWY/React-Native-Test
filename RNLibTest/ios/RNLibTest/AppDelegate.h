@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) UIWindow *window;
 
+@property (nonatomic, strong) UINavigationController *navi;
+
 @end
