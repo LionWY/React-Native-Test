@@ -1,0 +1,3 @@
+rootProject.name = 'RNJump'
+
+include ':app'
