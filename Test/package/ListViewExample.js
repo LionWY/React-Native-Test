@@ -6,7 +6,8 @@ import {
     TouchableHighlight,
     Text,
     Image,
-    RecyclerViewBackedScrollView
+    RecyclerViewBackedScrollView,
+    RefreshControl
 } from 'react-native';
 
 import NavigatorIOSExample from './NavigatorIOSExample';
@@ -18,10 +19,11 @@ export default class ListViewExample extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             dataSource: ds.cloneWithRows(this._genRows({})),
-
+            isRefreshing: false,
             _pressData: ({}: {[key: number]: boolean}),
 
         };
+
     }
     componentWillMount() {
         this.state._pressData ={};
@@ -29,7 +31,17 @@ export default class ListViewExample extends Component {
     }
 
     componentDidMount(){
-        // console.log(this.props.navigator);
+
+    }
+    _onRefresh = ()=> {
+        this.setState({
+            isRefreshing: true
+        });
+        setTimeout(()=>{
+            this.setState({
+                isRefreshing: false
+            });
+        }, 1000);
     }
 
     render() {
@@ -40,7 +52,37 @@ export default class ListViewExample extends Component {
                 renderRow={this._renderRow.bind(this)}
                 renderSectionHeader={this._renderSection.bind(this)}
                 renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+
                 renderSeparator={this._renderSeparator}
+                onEndReached={()=>alert('加载更多')}
+                onEndReachedThreshold = {-120}
+                renderFooter={()=>{
+                    return (
+                        <View style={{backgroundColor:'gray', height: 80, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text onPress={()=>alert('加载更多')}>
+                                点击加载更多，或者上拉100cm会加载更多
+                            </Text>
+                        </View>
+                    );
+                }}
+                renderHeader={()=>{
+                    return (
+                        <View style={{backgroundColor:'#143AAB', height: 50, justifyContent: 'center', alignItems: 'center'}}>
+                            <Text>
+                                这是tableView的tableViewHeader,下拉可以刷新
+                            </Text>
+                        </View>
+                    );
+                }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.isRefreshing}
+                        onRefresh={this._onRefresh}
+                        tintColor='#0EC5EE'
+                        title='Loading...'
+                        titleColor='gray'
+
+                />}
             />
         );
     }
