@@ -9,9 +9,8 @@ import IconExample from './IconExample';
 import ImagePickerExample from './ImagePickerExample';
 import HackerNews from './HackerNews';
 
-import {NativeModules} from 'react-native';
 
-var NativeVC = NativeModules.NativeVC;
+import WebviewExample from './WebviewExample';
 
 
 export function registerScenes() {
@@ -24,5 +23,6 @@ export function registerScenes() {
     Navigation.registerComponent('Scene.Icon', ()=> IconExample);
     Navigation.registerComponent('Scene.Camera', ()=> CameraPicture);
     Navigation.registerComponent('Scene.HN', ()=> HackerNews);
-    Navigation.registerComponent('Scene.NativeVC', ()=> NativeVC);
+
+    Navigation.registerComponent('Scene.WebView', ()=> WebviewExample);
 }

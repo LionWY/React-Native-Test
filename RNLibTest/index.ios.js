@@ -14,8 +14,9 @@ import {
   View
 } from 'react-native';
 
-registerScenes();
+import Icon from 'react-native-vector-icons/Ionicons';
 
+registerScenes();
 
 
 Navigation.startTabBasedApp({
@@ -47,7 +48,9 @@ Navigation.startTabBasedApp({
             screen: 'Scene.HN',
             icon: require('./img/4.png'),
             selectedIcon: require('./img/4-1.png'),
-            title: 'Hacker News'
+            // icon:()=> <Icon name='4.png' size={30} color='#333'/>,
+            // selectedIcon: ()=> <Icon name='4.png' size={30} color='#d81e06'/>,
+            title: '干活集中营'
         },
 
     ],

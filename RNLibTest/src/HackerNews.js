@@ -5,29 +5,31 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    ListView
+    ListView,
+    RefreshControl,
+    AlertIOS,
+    Image
 } from 'react-native';
 
 
-// import {
-//     SwRefreshListView,
-//     RefreshStatus,
-//     LoadMoreStatus,
-// } from 'react-native-swRefresh';
 
-const HACKER_NEWS_API = 'https://hacker-news.firebaseio.com/v0/';
+const GANK = 'http://gank.io/api/data/iOS/10/';
+
+var listData = [];
 
 
 export default class HackerNews extends Component {
 
-    _page = 1;
+
 
     constructor() {
         super();
+        var ds = new ListView.DataSource({rowHasChanged:(r1, r2)=> r1 !== r2});
+
         this.state={
-            storyIds: null,
-            lastIndex: null,
-            listData: null
+            dataSource: ds,
+            isRefreshing: false,
+            page: 1
         };
     }
 
@@ -37,68 +39,77 @@ export default class HackerNews extends Component {
     }
 
 
-    _renderRow(row) {
-
-        console.log('=========' + '11111111');
+    _renderRow(rowData, rowID) {
 
         return (
-            <TouchableOpacity onPress={()=>this.selectdRow(row)}>
+            <TouchableOpacity onPress={()=>this._selectedRow(rowData)}>
                 <View style={styles.cellView}>
+                    {/* <Image source={{uri: rowData.images[0]}} style={{height: 40, width: 40}}/> */}
                     <Text style={{color: 'gray'}}>
-                        row
+                        {rowData.who}: {rowData.desc}
                     </Text>
                 </View>
             </TouchableOpacity>
         )
     }
 
-    _selectedRow(row) {
-        alert('跳转')
+    _selectedRow(rowData) {
+        this.props.navigator.push({
+            screen: 'Scene.WebView',
+            title: rowData.who,
+            passProps: {url: rowData.url}
+        })
     }
 
-    _getData(page, callback, url) {
+    _onRefresh() {
+        this.setState({
+            page: 1
+        });
+        this._getData(this.state.page);
+    }
 
-        console.log('-----------------');
+    _getData(page) {
 
+        this.setState({
+            isRefreshing: true
+        });
         if (page === 1) {
 
-            fetch(url)
+            fetch(GANK+page)
             .then((response) => response.json())
-            .then((storyIds)=>{
-
+            .then((result)=>{
+                if (listData) {
+                    listData.splice(0, listData.length);
+                }
+                listData = result.results;
                 this.setState({
-                    storyIds: storyIds
+                    isRefreshing: false,
+                    dataSource: this.state.dataSource.cloneWithRows(listData),
                 });
-
-                this._getDataByStoryIds(storyIds, 0, 5, callback);
             })
 
         }
         else {
 
-            this._getDataByStoryIds(storyIds, this.state.lastIndex, 5, callback);
+            fetch(GANK+page)
+            .then((response) => response.json())
+            .then((result)=>{
+
+                var arr = result.results;
+                listData = listData.concat(arr);
+
+                this.setState({
+                    isRefreshing: false,
+                    dataSource: this.state.dataSource.cloneWithRows(listData),
+                });
+            })
 
         }
     }
 
-    _getDataByStoryIds(storyIds, startIndex, amountToAdd, callback) {
-        var rowData = [];
-        var endIndex = (startIndex + amountToAdd) < storyIds.length ? (startIndex + amountToAdd) : storyIds.length;
 
-        for (var i = startIndex; i < endIndex; i++) {
-            var url = HACKER_NEWS_API + 'item/' + storyIds[i] + '.json';
-            fetch(url)
-            .then((response) => response.json())
-            .then((story) => {
-                rowData.push(story);
-            })
-        }
-        callback(rowData);
-        this.setState({
-            lastIndex: endIndex
-        })
-
-        alert(rowData);
+    componentWillMount() {
+        this._onRefresh();
     }
 
 
@@ -109,6 +120,35 @@ export default class HackerNews extends Component {
         return (
             <View style={styles.container}>
 
+                <ListView
+                    enableEmptySections={true}
+                    style={{backgroundColor: 'white'}}
+                    renderRow={this._renderRow.bind(this)}
+                    dataSource={this.state.dataSource}
+                    renderFooter={()=>{
+                        return (
+                            <View style={styles.footStyle}>
+                                <Text onPress={()=>{
+                                    this.setState({
+                                        page: this.state.page + 1
+                                    });
+                                    this._getData(this.state.page);
+                                }}>
+                                    点击加载更多
+                                </Text>
+                            </View>
+                        )
+                    }}
+                    refreshControl={
+                        <RefreshControl
+
+                            onRefresh={this._onRefresh.bind(this)}
+                            refreshing={this.state.isRefreshing}
+                            title='loading...'
+                        />
+
+                    }
+                />
 
             </View>
         );
@@ -117,14 +157,23 @@ export default class HackerNews extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'red'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     cellView: {
-        borderBottomWidth: 1,
-        borderColor: 'black',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 40
+        borderBottomWidth: 0.5,
+        borderColor: 'gray',
+        padding: 5
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // height: 40,
     },
+
+    footStyle: {
+        height: 30,
+        backgroundColor: 'gray',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 
 })
