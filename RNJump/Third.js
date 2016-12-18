@@ -4,11 +4,9 @@ import {
     StyleSheet,
     Text
 } from 'react-native';
-import {NativeModules} from 'react-native';
 
-var native = NativeModules.NativeVC;
 
-export default class Second extends Component {
+export default class Third extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,10 +16,8 @@ export default class Second extends Component {
     render() {
         return (
             <View style={{flex: 1, backgroundColor: '#45D733', justifyContent: 'center', alignItems: 'center'}}>
-                <Text onPress={()=>{
-                    native.goToNextWith('我是从js过来的');
-                }}>
-                    跳到Native
+                <Text>
+                    终于回到了 RN
                 </Text>
 
 

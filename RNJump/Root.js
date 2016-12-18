@@ -24,10 +24,10 @@ export default class Root extends Component {
                         this.props.navigator.push({
                             component: Second,
                             title: 'RN第二页',
-                            leftButtonTitle: 'back',
-                            onLeftButtonPress: ()=>{
-                                this.props.navigator.pop()
-                            },
+                            // leftButtonTitle: 'back',
+                            // onLeftButtonPress: ()=>{
+                            //     this.props.navigator.pop()
+                            // },
                             passProps: {
                                 text: 'root'
                             }

@@ -34,15 +34,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
   
-    NSDictionary *dic = @{@"text": @"从xcode传过来的参数"};
+    NSDictionary *dic = @{@"text": @"从Xcode传过来的参数"};
     NSURL *jsCodeLocation;
   
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"NextSecond" fallbackResource:nil];
   
-    RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"NextSecond"
-                                               initialProperties:dic
-                                                   launchOptions:nil];
+    RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation moduleName:@"NextSecond"initialProperties:dic launchOptions:nil];
     rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   
     

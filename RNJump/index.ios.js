@@ -48,8 +48,8 @@ export default class App extends Component {
 
 
                 }}
+                barTintColor= 'cyan'
                 style={{flex: 1}}
-
 
             />
 
